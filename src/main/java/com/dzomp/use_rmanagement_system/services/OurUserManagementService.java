@@ -1,6 +1,6 @@
 package com.dzomp.use_rmanagement_system.services;
 
-import com.dzomp.use_rmanagement_system.dto.ReqResp;
+import com.dzomp.use_rmanagement_system.dto.OurUserDTO;
 import com.dzomp.use_rmanagement_system.entities.OurUser;
 import com.dzomp.use_rmanagement_system.repositories.OurUserRepository;
 
@@ -29,9 +29,9 @@ public class OurUserManagementService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public ReqResp registerUser(ReqResp registrationRequest) {
+    public OurUserDTO registerUser(OurUserDTO registrationRequest) {
 
-        ReqResp resp = new ReqResp();
+        OurUserDTO resp = new OurUserDTO();
 
 
 
@@ -58,8 +58,8 @@ public class OurUserManagementService {
     }
 
 
-    public ReqResp login(ReqResp loginRequest){
-        ReqResp response = new ReqResp();
+    public OurUserDTO login(OurUserDTO loginRequest){
+        OurUserDTO response = new OurUserDTO();
 
         try{
  authenticationManager.
@@ -81,9 +81,9 @@ public class OurUserManagementService {
         return response;
     }
 
-    public  ReqResp refreshToken(ReqResp  refreshRequest){
+    public OurUserDTO refreshToken(OurUserDTO refreshRequest){
 
-        ReqResp response = new ReqResp();
+        OurUserDTO response = new OurUserDTO();
 
         try{
             String ourEmail = jwtUtils.extractUsername(refreshRequest.getToken());//*
@@ -107,9 +107,9 @@ public class OurUserManagementService {
         return response;
     }
 
-    public  ReqResp getAllUsers(){
+    public OurUserDTO getAllUsers(){
 
-        ReqResp response = new ReqResp();
+        OurUserDTO response = new OurUserDTO();
 
         try{
 
@@ -133,8 +133,8 @@ public class OurUserManagementService {
         return response;
     }
 
-    public ReqResp getUserById(Integer id){
-            ReqResp response = new ReqResp();
+    public OurUserDTO getUserById(Integer id){
+            OurUserDTO response = new OurUserDTO();
 
             try{
                 OurUser userById = ourUserRepository.findById(id).orElseThrow(()->new UsernameNotFoundException("User not found"));
@@ -149,8 +149,8 @@ public class OurUserManagementService {
             return response;
     }
 
-    public ReqResp deleteUser(Integer userId){
-        ReqResp response = new ReqResp();
+    public OurUserDTO deleteUser(Integer userId){
+        OurUserDTO response = new OurUserDTO();
 
         try{
             Optional<OurUser> userOptional = ourUserRepository.findById(userId);
@@ -170,8 +170,8 @@ public class OurUserManagementService {
         return  response;
     }
 
-    public ReqResp updateUser(Integer userId, OurUser updateUser){
-        ReqResp response = new ReqResp();
+    public OurUserDTO updateUser(Integer userId, OurUser updateUser){
+        OurUserDTO response = new OurUserDTO();
         try {
             Optional<OurUser> userOptional = ourUserRepository.findById(userId);
             if(userOptional.isPresent()){
@@ -204,8 +204,8 @@ public class OurUserManagementService {
     }
 
 
-    public ReqResp getMyInfo(String email) {
-        ReqResp response = new ReqResp();
+    public OurUserDTO getMyInfo(String email) {
+        OurUserDTO response = new OurUserDTO();
 
         try {
             Optional<OurUser> userOptional = ourUserRepository.findByEmail(email);

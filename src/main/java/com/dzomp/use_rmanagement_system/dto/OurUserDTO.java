@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = false)
-public class ReqResp {
+public class OurUserDTO {
 
     private int statusCode;
     private String message;
